@@ -1,4 +1,4 @@
 mmnotes
 =======
 
-Notes on inference with mixed models
+Some personal notes on inference with mixed models
