@@ -1,0 +1,175 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES
+%----------------------------------------------------------------------------------------
+
+\usepackage[round]{natbib} % I want to use bibtex
+\usepackage{graphicx} % I want to include graphics
+\usepackage{color} % I want to use color to highlight comments
+\usepackage{authblk} % Multiple authors and intitutions
+\usepackage{pdflscape} % I want certain sections as a landscape
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage{fancyhdr} % Custom headers and footers
+\usepackage{hyperref} % I want to add functioning url references,f and link within the doc.
+\usepackage{url}     % I want to ut urls in the text and dont want latex complaining
+\usepackage[utf8]{inputenc} % this fixes some problems with non-ASCII characters
+\usepackage{tablefootnote} % I want table footnotes
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	SETTINGS
+%----------------------------------------------------------------------------------------
+
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\fancyhead[L]{} % No page header - if you want one, create it in the same way as the footers below
+
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{13.6pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{14pt} % Indentation from paragraphs 
+
+%% Add padding to code output
+\setlength\fboxsep{5mm}
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+
+\title{Notes on inference and model selection with mixed effect models}
+\date{\today}
+\author[1,2]{Marco D. Visser\thanks{m.visser@science.ru.nl}}
+
+\affil[1]{Departments of Experimental Plant Ecology and Animal Ecology \& Ecophysiology, Radboud University Nijmegen, the Netherlands}
+\affil[2]{Smithsonian Tropical Research Institute, Panama}
+
+\maketitle
+
+\tableofcontents
+
+\section{Introduction}
+
+Mixed models (MM) are a popular tool in ecology today, one that is rapidly gaining popularity as MM have become easy implement in most software packages (SAS, SPSS, R:lme4). The popularity of MM is likely largely due to the fact that ecological datasets often violate the assumptions of classical statistical tests. There is also increased interest in directly estimating variance (between individuals, or in space and time) as theoretical studies emphasize the effects of variability on e.g. population dynamics \citep{Pfister2003}. However, recent studies have shown the majority of studies in ecology (58 - 95\%) used these tools inappropriately \citep{Bolker2009}. Much is still unknown about mixed models, this document aims to summarize some of the key issues when trying to apply model selection and inference to MM, without going into great detail.
+
+\section{How Maximum Likelihood estimate are approximated. A key consideration.}
+
+To obtain Maximum Likelihood estimated for mixed models with random effects one must integrate likelihoods overall possible values of the random effects. For instance, if we are studying a system of organisms (e.g. seedlings, owlets, daphnia) and we were interested in the variation in survival over time, as well as the "classical" mean survival. The system could be described by: 
+
+\begin{equation}
+S_t \sim bin(p,N_{t-1}) 
+\end{equation}
+
+Where $S_t$ are the amount of surviving individuals at time t, from an original population of $N_{t-1}$ and $p$ is a random variable distributed as $p \sim beta(\alpha,\beta)$. The likelihood of observing a set of $S$ survivors, from $N$ individuals over $T$ years, given the parameters $alpha$ and $beta$ would be: 
+
+\begin{equation}
+\begin{split}
+L(\alpha,\beta \mid S,N) = \prod^{T}_{t=1} \left[ \int^{1}_{0} beta(p \mid \alpha,\beta) bin(S_t,N_{t-1} \mid p) dp \right]  \label{eqn:likbetabinom}
+\end{split}
+\end{equation}
+
+The example of integrating over all values of the the "random effect" p to obtain the MLE for $alpha$ and $beta$ is one of the few cases where an analytical solution exists (called the beta-binomial). However, in most cases, no analytical solution exists and integration must be done numerically. Even for simple problems this quickly becomes infeasible. For these reasons statisticians have come up ways to approximate the MLE of model parameters including random effects. These techniques include:
+
+\begin{enumerate}
+\item Pseudo and penalized quasi-likelihoods [PQL]
+\item Laplace Approximations [LA]
+\item Guasse-Hermite quadrature [GHQ]
+\item Monte Carlo Markov Chain methods [MCMC]
+\end{enumerate}
+
+All of the above can again be distinguished between standard ML estimation, in which the fixed effect parameters are assumed to be precisely correct when estimating the random effects (as above in \ref{eqn:likbetabinom}), or restricted maximum likelihood (REML) which averages over uncertainty in the fixed effects \citep{Pinheiro2000}. It is good to consider the precise method used in approximating the MLE, as this has serious consequences for model inference and selection.
+
+\section{A guide to mixed-model selection}
+
+Each of the above mentioned approximation methods, have key benefits and key disadvantages. I list some considerations below, for each method:
+
+\begin{enumerate}
+\item PQL is fast, yet yields biased estimated when variances in random effects (the sd's) are large. PQL also gives quasi-likelihood which many statisticians feel cannot be used in inference (Wald, Z and T statistics) or selection (e.g. AIC, DIC). Basically all inferences based on the likelihood are invalid \citep{Joe2008}. P-values and CI are complicated to calculate \footnote{see Douglas Bates rant on the matter: https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html}.
+\item LA, is less biased, and approaches the real ML and can therefore be used in likelihood based inference test - however it assumes the likelihood distribution is approximately normal. It is also slower and less flexible than PQL. P-values and CI are complicated as in PQL.
+\item GHQ, are even more precise than LA and also approach the real ML. It is much slower than LA and fitting models with more than 2–3 random effects is not considered feasible. P-values and CI are complicated as in PQL.
+\item MCMC methods are highly flexible, can handle many random-effects, and are theoretically well founded with the "Bayasian Framework". CI intervals and "p-values" (i.e. quantiles) are simple to calculate from the posterior distribution samples. They are notoriously slow however, and technically challenging to implement. MCMC methods give very similar answers to the above methods when datasets are informative and priors weak.
+\end{enumerate}
+
+\section{Problems associated with Random effects}
+
+Statistics as Z, t, $\chi^2$ and F are poor for models containing random effects as standard deviations are strictly positive $(\geq 0)$, and thus violate the null hypothesis assumption ($\sigma = 0$). Likelihood ratio tests are also problematic and highly unsuited for PQL estimates. Although when using LA and GHQ, likelihood ratio test can be used on random effects in some cases, however not if using REML. Guidelines on these issues are sparse, and I will update this section if more information arises.
+
+Another considerable problem in model selection and inference, is how to decide how many parameters a models has (in AIC) r df (in t, $\chi^2$ and F) when including random effects. How many parameters to you effectively have? With random effects included there is no straight answer, and simply counting the random effect sds is considered wrong. I have found no satisfactory answer to this, barring the use of DIC with MCMCs. DIC uses pD ('the effective number of parameters') instead of the number of parameters \citep{Spiegelhalter2002}. The idea behind pD is that it is a more appropriate measure of model complexity than parameters alone which may say little of how complex a model is to fit. 
+
+One strategy that can be used in combination with model selection tools as AIC in combination with random effects, is to select among model with the same random effects fit to the same data. This still leaves the question on how to select among models with different random effects.
+
+\section{Please contribute}
+If you have any comments or suggestion to improve this document, and make it a more comprehensive guide to inference with Mixed Effect models. Please add your suggestion through \footnote{\url{http://github.com/MarcoDVisser/mmnotes/issues}} or fork this repository on github \footnote{\url{http://github.com/MarcoDVisser/mmnotes}}.
+
+    \bibliographystyle{mee.bst}
+    \bibliography{references}
+\end{document}
