@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.28)  13 NOV 2013 18:44
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.4.28)  16 NOV 2013 21:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -805,25 +805,25 @@ Package Fancyhdr Warning: \headheight is too small (13.6pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[2] [3] (./mixedmodelguid.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 175.
- [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 175.
+[2] [3] (./mixedmodelguid.bbl [4])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 194.
+ [5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 194.
  (./mixedmodelguid.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 175.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 175.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 194.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 194.
 Package rerunfilecheck Info: File `mixedmodelguid.out' has not changed.
-(rerunfilecheck)             Checksum: 569F2F722CF1FDA28AD5167C4F333B51;345.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 175.
+(rerunfilecheck)             Checksum: 0C74CA6F69843853DDB4C5EB24BE6575;421.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 194.
  ) 
 Here is how much of TeX's memory you used:
- 7855 strings out of 495059
- 109668 string characters out of 3182030
+ 7861 strings out of 495059
+ 109719 string characters out of 3182030
  204374 words of memory out of 3000000
- 10861 multiletter control sequences out of 15000+200000
+ 10862 multiletter control sequences out of 15000+200000
  12364 words of font info for 48 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 33i,16n,43p,897b,399s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 33i,16n,43p,940b,399s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/tex
@@ -841,10 +841,10 @@ exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-d
 ist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on mixedmodelguid.pdf (4 pages, 213045 bytes).
+Output written on mixedmodelguid.pdf (5 pages, 219547 bytes).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 141 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
- 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 181 PDF objects out of 1000 (max. 8388607)
+ 154 compressed objects within 2 object streams
+ 35 named destinations out of 1000 (max. 500000)
+ 49 words of extra memory for PDF output out of 10000 (max. 10000000)
 
