@@ -4,4 +4,4 @@
 \contentsline {section}{\numberline {3}Key notes for mixed-model selection}{3}{section.3}
 \contentsline {section}{\numberline {4}Problems associated with Random effects}{3}{section.4}
 \contentsline {section}{\numberline {5}Some Important Mixed Model Assumptions}{4}{section.5}
-\contentsline {section}{\numberline {6}Please contribute}{4}{section.6}
+\contentsline {section}{\numberline {6}Please contribute}{5}{section.6}
