@@ -139,6 +139,15 @@ Here i denotes the "random block", for which random intercepts are estimated and
 \item 
 \end{enumerate}
 
+\section{The P-value controversy}
+
+P-values are a tricky issues with mixed-models. Confusion reigns \footnote{https://stat.ethz.ch/pipermail/r-sig-mixed-models/2008q2/000904.html} on how the p-values should be computed.  And because of this confusion, Doug Bates declines to provide p-values in lme4 \footnote{https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html}. I will try to summize the probelms, gathered from various online sources, shortly here. 
+
+P-values are in the traditional sense are a test of a null hypothesis. They are based on computing the probability of observing a test statistic as extreme or more extreme than the observed, if the null hypothesis is true. By convention, we reject the null hypothesis if the p-value is less than some threshold (often 0.05). P-values can be calculated once the "sampling distribution" or the asymptotic distribution of the test statistic under repeated sampling with equal sample size is known. We then use the cumulative distribution function of this distribution to calculate p-values (under the assumtion that null hypothesis is true). Probably the best know example of this is the t-distribution, used when we compare e.g. two normal means (given they have equal variances or adjusting the degrees of freedom when they have uneuqla variances and so on).
+
+With mixed-models, the cumulative distribution function of the test statistic when the null hypothesis is true is simply not known (as is the case in many other hierarchical models).  So, without the "sampling distribution" to compute the p-value, what do we do?  It turns out that for a limited range of hierarchical models e.g. split-plot designs in analysis of variance the reference distribution is known (it's called the F).  However the rules for these cases do not necessarily translate to the analysis of any arbitrary hierarchical design, which might be unbalanced, and have crossed and correlated random effects.
+
+Even if we can assume that the distribution in these more complex cases is the F, we still need to define the degrees of freedom.  The numerator degrees of freedom are obvious (variance between models), but the denominator degrees of freedom are not so easily calculated (see also the problems accociated with AIC above). Numerous ways on how to adjust the denominator degrees of freedom have been suggested but this still brings uss back to the first problem that it is anything but clear if the reference distribution is truely F, and therefore it remains a question if correcting the denominator degrees of freedom solves anything. 
 
 \section{Please contribute}
 Any comments or suggestions on how to improve this document, and make it a more comprehensive guide to inference with Mixed Effect models, are welcome. You can add your suggestions or comments through \footnote{\url{http://github.com/MarcoDVisser/mmnotes/issues}} or fork this repository on github \footnote{\url{http://github.com/MarcoDVisser/mmnotes}}.
