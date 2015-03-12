@@ -100,6 +100,47 @@ This example of integrating over all values of the the "random effect" p to obta
 
 All of the above can again be distinguished between standard ML estimation, in which the fixed effect parameters are assumed to be precisely correct when estimating the random effects (as above in \ref{eqn:likbetabinom}), or restricted maximum likelihood (REML) which averages over uncertainty in the fixed effects \citep{Pinheiro2000}. It is good to consider the precise method used in approximating the MLE, as this has serious consequences for model inference and selection.
 
+\section{Mixed effect models: benefits}
+Mixed effect models are essentially multi-level or hierarchical models. Many researchers view multi-level models as superior stating that they are almost always an improvement. Here is a list of commonly associated benefits \citep{Gelman2006}:  
+
+\begin{enumerate}
+\item Models in which you pool all data (e.g. average over groups), are likely to underfit the data, while model where you don't pool the data (e.g. fit one model per group) tend to overfit the data.
+\item Multilevel models outperform classical regression in predictive accuracy. Cross validation studies show that multilevel models, by allowing shrinkage, have lower mean squared error for prediction.  
+\item In inference, correlations can lead to erroneous conclusions with classical approaches. This happens when we confound variables at different levels.
+\end{enumerate}
+
+The following simulation study illustrates some of the benefits of the hierarchical nature of mixed effect models.  Lets assume we sampled data (Y) from a population with 20 distinct groups. Within each group, Y related to X, as follows: 
+
+\begin{equation}
+\begin{split}
+X \sim Normal(\mu=X_g,\sigma=0.01) \\
+Y \sim Normal(0,1) + Normal(0.5X,0.01)
+\end{split}
+\end{equation}
+
+Where $X_g$ is the group average. While the group mean values are uniformly distributed.
+
+\begin{equation}
+\begin{split}
+X_g \sim Uniform(0,4)
+\end{split}
+\end{equation}
+
+We also have a common unbalanced design where some groups have more samples than others, here 5 groups have 2000 samples and the others 100. Our simulation has a clear multi-level structure of a within group trends, which does not exist on the between group means. The graph below shows the performance of the classic approaches and a mixed effect model.
+
+%\begin{landscape}
+\begin{figure}[!ht]
+\begin{center}
+<<LianaTolerance,echo=FALSE,eval=TRUE,fig.width=7,fig.height=7,message=FALSE, warning=FALSE>>=
+source("../R/simulationExample.R")
+@
+\caption{In Panel A, we correlate the groups means and find no relationship (r=0.06,p=0.53). In panel B, we see that both classic regression and a more flexible general additive model (GAM) both have the tendancy for overfitting to the most numerous sampled groups. The mixed effect model produces a fit that is close to the "truth" or data generating model. }\label{fig:lianalambdas}.
+\end{center}
+\end{figure}
+%\end{landscape}
+
+
+
 \section{Key notes for mixed-model selection}
 
 Each of the above mentioned approximation methods, have certain benefits and disadvantages. I list some considerations below, for each method:
@@ -135,7 +176,6 @@ Y_{ij}  = \beta_{0}+\mu_{0i}+B_i X_{ij} + \epsilon_{ij} \\
 \end{equation}
 
 Here i denotes the "random block", for which random intercepts are estimated and j the individual observations in that block i. Observations at level j are usually assumed independent while observations over level i usually not. We see that both $\mu_{0i}$ and $\epsilon_{ij}$ are assumed assumed to be are independent and normally distributed with mean 0 and variance $\tau^2$ and $\sigma^2$ respectively. And that residuals $\epsilon_{ij}$ are calculated taking the random intercepts into account! In a GLMM the normality assumption of the errors $\epsilon$ is relaxed, however the normal assumption on the random intercepts remains. The normality assumption of random effects can be further relaxed in a Bayesian framework.
-
 \item 
 \end{enumerate}
 
