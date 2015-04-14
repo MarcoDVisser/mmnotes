@@ -1,8 +1,12 @@
 mmnotes
 =======
 
-Some personal notes on inference with mixed models.
+The reprository contains my personal notes on inference with mixed models.
+It also contains a growing library of diagnostic functions for lme4 objects.
 
-Download the pdf [here](https://github.com/MarcoDVisser/mmnotes/blob/master/Man/mixedmodelguid.pdf?raw=true).
+Download the pdf with notes [here](https://github.com/MarcoDVisser/mmnotes/blob/master/Man/mixedmodelguid.pdf?raw=true).
 
-Add suggestions to http://github.com/MarcoDVisser/mmnotes/issues
+Look at the R diagnostic functions [here](https://github.com/MarcoDVisser/mmnotes/blob/master/R/diagnostics.R).
+
+
+Add suggestions to http://github.com/MarcoDVisser/mmnotes/issues or contribute directly by forking the repro and creating pull requests!
