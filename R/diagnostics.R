@@ -17,7 +17,7 @@
 ##' @export
 resPlot <- function(mod=NULL,covariate=NULL,gam=FALSE,...){
 
-  if(is.null(mod)|!is.element("lmerMod",class(mod))){
+  if(is.null(mod)|!any(c("lmerMod","glmerMod")%in%class(mod))){
     stop("supply a lme4 object")}
 
   if(is.null(covariate)) covariate <- all.vars(as.formula(mod@call))[2]
@@ -28,7 +28,12 @@ resPlot <- function(mod=NULL,covariate=NULL,gam=FALSE,...){
   if(!gam) if(!"gam"%in%rownames(installed.packages())) {
     stop("package gam not installed")}
 
-  Residuals <- residuals(mod)
+  if(mod@call[4]=="binomial()"){
+  Residuals <- residuals(mod,type="pearson")
+  } else{Residuals <- residuals(mod)}
+  x <- temp@frame$size
+
+  
   x <- mod@frame[,covariate]
   
   plot(x,Residuals,main="residual plot",...)
