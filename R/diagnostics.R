@@ -3,7 +3,9 @@
 ##' Builds a residual plot from the information provided
 ##' within the lme4 object. Automatically using the first
 ##' covariate to plot the residuals against when no other
-##' arguments are supplied. 
+##' arguments are supplied. Pearson residuals are used for
+##" GLMs fit with the binomial family.
+##'
 ##' 
 ##' @param mod lme4 model object 
 ##' @param covariate optional covariate to plot the residuals
